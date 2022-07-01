@@ -1,6 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\PostsController;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Jetstream\Rules\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +19,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('blogs/{id}',[PostsController::class, 'destroy'])->name('posts.destroy');
+
+
+Route::resource('blogs', App\Http\Controllers\PostsController::class);
+//Route::resource('blogs', App\Http\Controllers\CommentsController::class);
+
+//posts
+Route::post('postinsert', [PostsController::class, 'store']);
+Route::post('commentinsert', [CommentsController::class, 'store']);
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -23,6 +40,7 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        $data = DB::table('users')->get();
+        return view('dashboard', compact('data'));
     })->name('dashboard');
 });

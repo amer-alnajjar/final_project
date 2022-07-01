@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+
 return new class extends Migration
 {
     /**
@@ -14,9 +15,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->id('id');
+            // $table->integer('user_id')->unsigned();
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->string('caption');
             $table->timestamps();
         });

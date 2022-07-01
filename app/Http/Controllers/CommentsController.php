@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\comments;
 use App\Http\Requests\StorecommentsRequest;
 use App\Http\Requests\UpdatecommentsRequest;
+use App\Models\posts;
+use Illuminate\Support\Facades\DB;
+
 
 class CommentsController extends Controller
 {
@@ -37,6 +40,13 @@ class CommentsController extends Controller
     public function store(StorecommentsRequest $request)
     {
         //
+        $posts = DB::table('posts')->first();
+        $query = DB::table('comments')->insert([
+            'comment_text' => $request->input('comment'),
+            'user_id' => auth()->id(),
+            'post_id' => $posts->id
+        ]);
+        return redirect()->back();
     }
 
     /**

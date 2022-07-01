@@ -14,7 +14,10 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('BLOG') }}
+                        {{ __('HOME') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('blogs.index') }}" :active="request()->routeIs('blogs.*')">
+                        {{ __('BLOGS') }}
                     </x-jet-nav-link>
                 </div>
             </div>
@@ -114,7 +117,7 @@
                                 @csrf
 
                                 <x-jet-dropdown-link href="{{ route('logout') }}"
-                                         @click.prevent="$root.submit();">
+                                        @click.prevent="$root.submit();">
                                     {{ __('Log Out') }}
                                 </x-jet-dropdown-link>
                             </form>
@@ -139,7 +142,10 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+                {{ __('HOME') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('blogs.index') }}" :active="request()->routeIs('blogs.*')">
+                {{ __('BLOGS') }}
             </x-jet-responsive-nav-link>
         </div>
 
@@ -175,7 +181,7 @@
                     @csrf
 
                     <x-jet-responsive-nav-link href="{{ route('logout') }}"
-                                   @click.prevent="$root.submit();">
+                                @click.prevent="$root.submit();">
                         {{ __('Log Out') }}
                     </x-jet-responsive-nav-link>
                 </form>
